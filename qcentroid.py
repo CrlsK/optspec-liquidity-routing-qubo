@@ -19,6 +19,15 @@ ALGORITHM_NAME = 'GreedySeed_then_dwaveNeal_SA_venueChoice_QUBO_v1'
 
 
 def solver(input_data, **kwargs):
+    import ast, json as _json
+    if isinstance(input_data, str):
+        try:
+            input_data = _json.loads(input_data)
+        except Exception:
+            try:
+                input_data = ast.literal_eval(input_data)
+            except Exception:
+                input_data = {}
     t0 = time.perf_counter()
     started = datetime.now(timezone.utc).isoformat()
     raw = (input_data or {}).get('data', input_data) or {}
